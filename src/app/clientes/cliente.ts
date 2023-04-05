@@ -3,6 +3,7 @@ export interface Cliente {
   nombre:string;
   apellido: string;
   email: string;
-  createAt: string;
-  // interface 
+  createdAt: string;
+  // createdAt:string;
+  // interface de usuario para usar clientes
 }

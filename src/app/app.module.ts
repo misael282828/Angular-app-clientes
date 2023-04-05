@@ -9,6 +9,7 @@ import { ClientesComponent } from './clientes/clientes.component';
 import { RouterModule,Routes } from '@angular/router';
 import { ClientesService } from './clientes/clientes.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClientModule } from '@angular/common/http';
 
 export const routes: Routes = [
 
@@ -32,7 +33,7 @@ export const routes: Routes = [
    
      //paso 2- usar aqui el componente creado
   ],
-  imports: [BrowserModule, RouterModule.forRoot(routes), NgbModule],
+  imports: [BrowserModule,HttpClientModule, RouterModule.forRoot(routes), NgbModule],
   providers: [ClientesService],
   bootstrap: [AppComponent],
 })

@@ -6,10 +6,10 @@ import { ClientesService } from './clientes.service';
   selector: 'app-clientes',
   templateUrl: './clientes.component.html',
   
-})
+})//
 export class ClientesComponent implements OnInit{
   
-   clientes:Cliente[]=[];
+   clientes:Cliente[]=[]; //m
 
   constructor(private clientesService: ClientesService){}
   
