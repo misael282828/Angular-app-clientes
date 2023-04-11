@@ -6,18 +6,19 @@ import { FooterComponent } from './footer/footer.component';
 import { DirectivaComponent } from './directiva/directiva.component';
 import { HeaderComponent } from './header/header.component';
 import { ClientesComponent } from './clientes/clientes.component';
-import { RouterModule,Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { ClientesService } from './clientes/clientes.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
+import { FormComponent } from './clientes/form.component';
+import { FormsModule } from '@angular/forms';
 
 export const routes: Routes = [
-
-  {path: '', redirectTo: '/clientes', pathMatch: 'full'},
-  {path: 'directivas', component: DirectivaComponent},
-  {path: 'clientes', component: ClientesComponent},
+  { path: '', redirectTo: '/clientes', pathMatch: 'full' },
+  { path: 'directivas', component: DirectivaComponent },
+  { path: 'clientes', component: ClientesComponent },
+  { path: 'clientes/form', component: FormComponent },
 ];
-
 
 // paso 1 -importar aqui
 
@@ -28,13 +29,18 @@ export const routes: Routes = [
     FooterComponent,
     DirectivaComponent,
     ClientesComponent,
-    
- 
-   
-     //paso 2- usar aqui el componente creado
+    FormComponent,
+
+    //paso 2- usar aqui el componente creado
   ],
-  imports: [BrowserModule,HttpClientModule, RouterModule.forRoot(routes), NgbModule],
-  providers: [ClientesService],
+  imports: [
+    BrowserModule,// parte de las rutas 
+    HttpClientModule,// peticiones http
+    FormsModule, //para formularios
+    RouterModule.forRoot(routes), // para rutas
+    NgbModule,
+  ],
+  providers: [ClientesService],//implementacion de las peticiones http
   bootstrap: [AppComponent],
 })
 export class AppModule {}

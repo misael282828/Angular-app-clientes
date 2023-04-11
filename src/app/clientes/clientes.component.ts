@@ -5,19 +5,21 @@ import { ClientesService } from './clientes.service';
 @Component({
   selector: 'app-clientes',
   templateUrl: './clientes.component.html',
-  
-})//
-export class ClientesComponent implements OnInit{
-  
-   clientes:Cliente[]=[]; //m
+  styleUrls: ['./clientes.component.css'],
+}) 
 
-  constructor(private clientesService: ClientesService){}
-  
+export class ClientesComponent implements OnInit {
+  clientes: Cliente[] = []; //m
+
+  constructor(private clientesService: ClientesService) {}
+
   ngOnInit() {
-    
-    this.clientesService.getClientes().subscribe(
-      clientes => this.clientes = clientes
-    );
+    this.clientesService
+      .getClientes()
+      .subscribe((clientes) => (this.clientes = clientes));
   }
+
+  
+
 
 }
