@@ -1,18 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Cliente } from './cliente';
 import { ClientesService } from './clientes.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
 })
-export class FormComponent {
+export class FormComponent implements OnInit {
   //inyectar servicios
 
   // private clientesService: ClientesService = new this.clientesService()
-  constructor(private clientesService: ClientesService,
-    private router: Router ) {}
+  constructor(
+    private clientesService: ClientesService,
+    private router: Router,
+    private activetedRoute: ActivatedRoute
+  ) {}
+
+  ngOnInit(): void {
+    this.cargarCliente();
+  }
 
   public cliente: Cliente = {
     nombre: '',
@@ -22,24 +30,40 @@ export class FormComponent {
 
   public titulo: string = 'Crear Cliente';
 
-  
   public create(): void {
-    this.clientesService.create(this.cliente).subscribe(
-      response => this.router.navigate(['/clientes'])
-      )
-    }
-
-    
-    // public create(): void {
-    //   this.clientesService.crearUsuario(this.cliente);
-    // }
-
-  validarCampos(): boolean {
-    if (
-      (this.cliente.nombre = '' || this.cliente.apellido || this.cliente.email)
-    ) {
-      return true;
-    }
-    return false;
+    this.clientesService.create(this.cliente).subscribe((cliente) => {
+      this.router.navigate(['/clientes']);
+      Swal.fire(
+        'Nuevo Cliente',
+        `Cliente ${cliente.nombre} creado con exito!  `,
+        'success'
+      );
+    });
   }
+
+  update(): void {
+    this.clientesService.update(this.cliente).subscribe((cliente) => {
+      this.router.navigate(['/clientes']);
+      Swal.fire(
+        'Cliente Actualizado',
+        `Cliente ${cliente.nombre} Actualizado con exito!  `,
+        'success'
+      );
+    });
+  }
+
+  cargarCliente(): void {
+    this.activetedRoute.params.subscribe((params) => {
+      let id = params['id'];
+      if (id) {
+        this.clientesService
+          .getCliente(id)
+          .subscribe((cliente) => (this.cliente = cliente));
+      }
+    });
+  }
+
+  // public create(): void {
+  //   this.clientesService.crearUsuario(this.cliente);
+  // }
 }
