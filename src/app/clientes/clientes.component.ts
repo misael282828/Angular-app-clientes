@@ -18,7 +18,7 @@ export class ClientesComponent implements OnInit {
     this.clientesService
       .getClientes()
       .subscribe((clientes) => (this.clientes = clientes));
-      console.log("este es get cliente")
+      
   }
 
   delete(cliente:Cliente):void{
@@ -31,6 +31,7 @@ export class ClientesComponent implements OnInit {
       buttonsStyling: false
     })
     
+    //swalWithBootstrapButtons es una funcion para elegir si o no en un alert
     swalWithBootstrapButtons.fire({
       title: `Desea eliminar al cliente ${cliente.nombre} ${cliente.apellido}?`,
       text: `Perdera toda informacion del cliente! `,
