@@ -1,3 +1,12 @@
+
+<!-- remover el bullet de el ul -->
+
+  <ul class="alert alert-danger list-unstyled " *ngIf="errores && errores.length > 0">
+    <li *ngFor="let error of errores">{{ error }}</li>
+  </ul>
+
+
+
 <div class="card  bg-dark text-white">
   <div class="card-header">{{ titulo }}</div>
   <div class="card-body ">
@@ -12,17 +21,17 @@
           type="text"
           class="form-control"
           name="nombre"
-          required minlength="4"
+           minlength="4"
           [(ngModel)]="cliente.nombre"
           />
-          <div class="alert alert-danger" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
-            <div  *ngIf="nombre.errors?.['required']">
+          <!-- <div class="alert alert-danger" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+            <div  *ngIf="nombre.errors?.['required']"> 
               Nombre es requerido 
             </div>
             <div *ngIf="nombre.errors?.['minlength']">
               Nombre debe tener al menos 4 caracteres 
             </div>
-          </div>
+          </div> -->
 
       </div>
 
@@ -36,10 +45,12 @@
           #nombre="ngModel"
           type="text"
           class="form-control"
-          required #apellido="ngModel" 
+           #apellido="ngModel" 
           [(ngModel)]="cliente.apellido"
           name="apellido"
+          
           />
+          <!--required   -->
           <div class="alert alert-danger" *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)">
             <div  *ngIf="apellido.errors?.['required']">
               Apellido es requerido 
@@ -64,9 +75,10 @@
           type="email"
           class="form-control"
           name="email"
-          required  email #email="ngModel"
+             #email="ngModel"
           [(ngModel)]="cliente.email"
         />
+          <!--required email -->
 
         <div class="alert alert-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
           <div  *ngIf="email.errors?.['required']">

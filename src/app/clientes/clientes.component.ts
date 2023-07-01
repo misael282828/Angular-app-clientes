@@ -19,7 +19,8 @@ export class ClientesComponent implements OnInit {
       .getClientes()
       .subscribe((clientes) => (this.clientes = clientes));
       
-  }
+      
+  } 
 
   delete(cliente:Cliente):void{
 
@@ -49,8 +50,9 @@ export class ClientesComponent implements OnInit {
             swalWithBootstrapButtons.fire(
               'Eliminado!',
               `Cliente ${cliente.nombre} eliminado con exito`,
-              'success'
+              'success',
             )
+            console.log(cliente.createdAt)
           }
          )
         

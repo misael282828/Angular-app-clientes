@@ -9,13 +9,17 @@ import Swal from 'sweetalert2';
   templateUrl: './form.component.html',
 })
 export class FormComponent implements OnInit {
-  //inyectar servicios
+  //inyectar services
 
   // private clientesService: ClientesService = new this.clientesService()
+  public errores: string[] = [];
+
   constructor(
     private clientesService: ClientesService,
     private router: Router,
-    private activetedRoute: ActivatedRoute
+    private activetedRoute: ActivatedRoute,
+    
+
   ) {}
 
   ngOnInit(): void {
@@ -31,28 +35,42 @@ export class FormComponent implements OnInit {
   public titulo: string = 'Crear Cliente';
 
   public create(): void {
-    console.log(this.cliente)
+    console.log(this.cliente);
 
-    this.clientesService.create(this.cliente).subscribe((json) => {
-      this.router.navigate(['/clientes']);
-      Swal.fire(
-        'Nuevo Cliente',
-        `Cliente ${json.cliente.nombre} creado con exito!  `,
-        'success'
-      );
-      console.log(this.cliente)
-    });
+    this.clientesService.create(this.cliente).subscribe(
+      (json) => {
+        this.router.navigate(['/clientes']);
+        Swal.fire(
+          'Nuevo Cliente',
+          `Cliente ${json.cliente.nombre} creado con exito! `,
+          'success'
+        );
+        console.log(this.cliente);
+      },
+      (err) => {
+        this.errores = err.error.errors as string[];
+        console.log(err.error.errors);
+        console.log('Codigo de error desde el backend: ' + err.status);
+      }
+    );
   }
 
   update(): void {
-    this.clientesService.update(this.cliente).subscribe((cliente) => {
-      this.router.navigate(['/clientes']);
-      Swal.fire(
-        'Cliente Actualizado',
-        `Cliente ${cliente.nombre} Actualizado con exito!  `,
-        'success'
-      );
-    });
+    this.clientesService.update(this.cliente).subscribe(
+      (cliente) => {
+        this.router.navigate(['/clientes']);
+        Swal.fire(
+          'Cliente Actualizado',
+          `Cliente ${cliente.nombre} Actualizado con exito!  `,
+          'success'
+        );
+      },
+      (err) => {
+        this.errores = err.error.errors as string[];
+        console.log(err.error.errors);
+        console.log('Codigo de error desde el backend: ' + err.status);
+      }
+    );
   }
 
   cargarCliente(): void {

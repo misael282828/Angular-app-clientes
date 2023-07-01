@@ -1,4 +1,6 @@
 
+
+
 <div class="card border-primary mb-3  " >
   <div class="card-header ">Clientes</div>
   <div class="card-body text-primary">
@@ -30,7 +32,7 @@
           <td>{{cliente.nombre}} </td>
           <td>{{cliente.apellido}} </td>
           <td>{{cliente.email}} </td>
-          <td>{{cliente.createdAt}} </td>
+          <td>{{cliente.createdAt | date:'yyyy-MM-dd'}} </td>
           <td>
             <button class="btn btn-primary btn-sm" type="button" name="editar" [routerLink]="['/clientes/form/', cliente.id]">Editar</button>
           </td>

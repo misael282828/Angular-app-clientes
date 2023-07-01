@@ -29,6 +29,12 @@ export class ClientesService {
   create(cliente: Cliente): Observable<any> {
     return this.http.post<any>(this.urlEndPoint, cliente, {
       headers: this.httpHeaders }).pipe(catchError (e => {
+
+        //indicamos como mostrar los errores 
+          if(e.status==400){
+            return throwError(e);
+          }
+
         console.log(e.error.mensaje);
         swal.fire('Error al crear cliente ', e.error.mensaje, 'error');
         return throwError(e);
@@ -39,6 +45,12 @@ export class ClientesService {
   update(cliente:Cliente): Observable<Cliente>{
     return this.http.put<Cliente>(`${this.urlEndPoint}/${cliente.id}`, cliente, {headers: this.httpHeaders}).pipe(
       catchError (e => {
+
+        //indicamos como mostrar los errores 
+        if(e.status==400){
+          return throwError(e);
+        }
+
         console.log(e.error.mensaje);
         swal.fire('Error al editar', e.error.mensaje, 'error');
         return throwError(e);
